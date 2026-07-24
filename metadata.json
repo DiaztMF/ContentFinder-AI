@@ -1,0 +1,6 @@
+{
+  "name": "Content Finder AI",
+  "description": "AI-Powered Content Search & Discovery Engine for indexing, summarizing, and semantically discovering web content, articles, videos, and documentation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
