@@ -73,7 +73,7 @@ export function ContentGrid({
   return (
     <div className="w-full space-y-6">
       {/* Controls Bar */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-zinc-900 border border-zinc-800 p-3.5 rounded-2xl shadow-xl">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-3.5 rounded-2xl shadow-sm dark:shadow-xl">
         {/* Category Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
           {CATEGORIES.map((cat) => (
@@ -83,7 +83,7 @@ export function ContentGrid({
               className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
-                  : 'bg-zinc-800 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700'
+                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-700'
               }`}
             >
               {cat}
@@ -97,7 +97,7 @@ export function ContentGrid({
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value as any)}
-            className="px-3 py-1.5 rounded-xl text-xs font-medium bg-zinc-800 border border-zinc-700 text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+            className="px-3 py-1.5 rounded-xl text-xs font-medium bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
           >
             <option value="all">All Formats</option>
             <option value="article">Articles</option>
@@ -111,7 +111,7 @@ export function ContentGrid({
           <select
             value={selectedDifficulty}
             onChange={(e) => setSelectedDifficulty(e.target.value as any)}
-            className="px-3 py-1.5 rounded-xl text-xs font-medium bg-zinc-800 border border-zinc-700 text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+            className="px-3 py-1.5 rounded-xl text-xs font-medium bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
           >
             <option value="all">All Levels</option>
             <option value="Beginner">Beginner</option>
@@ -123,7 +123,7 @@ export function ContentGrid({
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-3 py-1.5 rounded-xl text-xs font-medium bg-zinc-800 border border-zinc-700 text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer font-semibold"
+            className="px-3 py-1.5 rounded-xl text-xs font-medium bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer font-semibold"
           >
             <option value="score">Sort: Relevance</option>
             <option value="newest">Sort: Newest</option>
@@ -146,15 +146,15 @@ export function ContentGrid({
           ))}
         </div>
       ) : (
-        <div className="bg-zinc-900 border border-dashed border-zinc-800 rounded-2xl p-12 text-center space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 mx-auto flex items-center justify-center border border-blue-500/20">
+        <div className="bg-white dark:bg-zinc-900 border border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl p-12 text-center space-y-4">
+          <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 mx-auto flex items-center justify-center border border-blue-500/20">
             <Inbox className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-zinc-100">
+            <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
               No matching content found
             </h3>
-            <p className="text-xs text-zinc-400 max-w-md mx-auto mt-1">
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 max-w-md mx-auto mt-1">
               Try adjusting your category filters or submit a new link/article to index with Gemini AI!
             </p>
           </div>
@@ -165,7 +165,7 @@ export function ContentGrid({
                 setSelectedType('all');
                 setSelectedDifficulty('all');
               }}
-              className="px-4 py-2 rounded-xl text-xs font-medium bg-zinc-800 text-zinc-300 hover:bg-zinc-700 transition-colors"
+              className="px-4 py-2 rounded-xl text-xs font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
             >
               Reset Filters
             </button>

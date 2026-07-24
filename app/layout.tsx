@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-[#09090b] text-zinc-100 antialiased font-sans selection:bg-blue-600 selection:text-white">
+      <body className="min-h-screen bg-zinc-50 dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 antialiased font-sans selection:bg-blue-600 selection:text-white transition-colors duration-200">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <div className="relative min-h-screen flex flex-col justify-between">
             {children}

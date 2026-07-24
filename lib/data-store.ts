@@ -40,7 +40,7 @@ export async function getAllContents(): Promise<ContentItem[]> {
         }));
       }
     } catch (e) {
-      console.warn('Postgres query error, using in-memory contents:', e);
+      // Postgres query error or missing table fallback
     }
   }
   return memoryContents;
@@ -123,7 +123,7 @@ export async function getAllCollections(): Promise<Collection[]> {
         });
       }
     } catch (e) {
-      console.warn('Postgres collections query error, using memory:', e);
+      // Postgres collections query error or missing table fallback
     }
   }
   return memoryCollections;

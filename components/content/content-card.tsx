@@ -67,7 +67,7 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
   return (
     <div
       onClick={() => onSelect(item)}
-      className="group relative bg-zinc-900/90 border border-zinc-800 rounded-2xl p-5 shadow-2xl hover:border-blue-500/50 hover:shadow-blue-500/5 transition-all duration-300 flex flex-col justify-between cursor-pointer overflow-hidden"
+      className="group relative bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 shadow-sm dark:shadow-2xl hover:border-blue-500/50 hover:shadow-blue-500/10 transition-all duration-300 flex flex-col justify-between cursor-pointer overflow-hidden"
     >
       {/* Top Meta Bar */}
       <div>
@@ -80,7 +80,7 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
             </span>
 
             {/* Category */}
-            <span className="text-xs font-semibold px-2.5 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700/60">
+            <span className="text-xs font-semibold px-2.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/60">
               {item.category}
             </span>
 
@@ -98,8 +98,8 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
             }}
             className={`p-2 rounded-xl transition-colors cursor-pointer ${
               isSaved
-                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                : 'text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800'
+                ? 'bg-blue-50 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-500/30'
+                : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800'
             }`}
             title={isSaved ? 'Saved to collection' : 'Save to collection'}
           >
@@ -108,13 +108,13 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
         </div>
 
         {/* Title */}
-        <h3 className="text-base font-bold text-zinc-100 group-hover:text-blue-400 transition-colors line-clamp-2 leading-snug mb-2">
+        <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 leading-snug mb-2">
           {item.title}
         </h3>
 
         {/* Source & Read time */}
-        <div className="flex items-center gap-3 text-xs text-zinc-400 mb-3 font-mono">
-          <span className="font-semibold text-zinc-300">
+        <div className="flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400 mb-3 font-mono">
+          <span className="font-semibold text-zinc-700 dark:text-zinc-300">
             {item.source}
           </span>
           <span>&bull;</span>
@@ -125,18 +125,18 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
         </div>
 
         {/* AI Summary Preview */}
-        <p className="text-xs text-zinc-400 line-clamp-3 leading-relaxed mb-4">
+        <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-3 leading-relaxed mb-4">
           {item.summary}
         </p>
 
         {/* Key Takeaways Preview */}
         {item.keyTakeaways && item.keyTakeaways.length > 0 && (
-          <div className="bg-zinc-950/80 rounded-xl p-2.5 border border-zinc-800 text-[11px] space-y-1 mb-4">
-            <div className="font-semibold flex items-center gap-1 text-[10px] uppercase tracking-wider text-blue-400">
+          <div className="bg-zinc-50 dark:bg-zinc-950/80 rounded-xl p-2.5 border border-zinc-200 dark:border-zinc-800 text-[11px] space-y-1 mb-4">
+            <div className="font-semibold flex items-center gap-1 text-[10px] uppercase tracking-wider text-blue-600 dark:text-blue-400">
               <Sparkles className="w-3 h-3" /> Key Takeaway
             </div>
-            <div className="text-zinc-300 line-clamp-1 flex items-start gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+            <div className="text-zinc-700 dark:text-zinc-300 line-clamp-1 flex items-start gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
               <span>{item.keyTakeaways[0]}</span>
             </div>
           </div>
@@ -147,7 +147,7 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
       <div>
         {/* Match Explanation if searching */}
         {item.matchExplanation && (
-          <div className="text-[11px] text-blue-300 bg-blue-500/10 p-2 rounded-lg mb-3 italic border border-blue-500/20 line-clamp-1">
+          <div className="text-[11px] text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-500/10 p-2 rounded-lg mb-3 italic border border-blue-200 dark:border-blue-500/20 line-clamp-1">
             &quot;{item.matchExplanation}&quot;
           </div>
         )}
@@ -157,7 +157,7 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
           {item.tags.slice(0, 4).map((tag, idx) => (
             <span
               key={idx}
-              className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 border border-zinc-700/50"
+              className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700/50"
             >
               #{tag}
             </span>
@@ -165,14 +165,14 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
         </div>
 
         {/* Bottom Bar: Score, Views & Actions */}
-        <div className="flex items-center justify-between border-t border-zinc-800 pt-3 text-xs">
+        <div className="flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800 pt-3 text-xs">
           {/* AI Match Score */}
-          <div className="px-2 py-0.5 bg-blue-500/10 text-blue-400 text-[10px] font-bold rounded uppercase tracking-wider border border-blue-500/20 flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-blue-400" />
+          <div className="px-2 py-0.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[10px] font-bold rounded uppercase tracking-wider border border-blue-500/20 flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-blue-600 dark:text-blue-400" />
             <span>{matchScore}% MATCH</span>
           </div>
 
-          <div className="flex items-center gap-3 text-zinc-500">
+          <div className="flex items-center gap-3 text-zinc-400 dark:text-zinc-500">
             <span className="flex items-center gap-1 text-[11px] font-mono">
               <Eye className="w-3.5 h-3.5" />
               {item.views}
@@ -180,7 +180,7 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
 
             <button
               onClick={handleShare}
-              className="p-1.5 text-zinc-500 hover:text-zinc-200 transition-colors"
+              className="p-1.5 text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
               title="Copy original link"
             >
               <Share2 className="w-3.5 h-3.5" />
@@ -191,7 +191,7 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="p-1.5 text-zinc-500 hover:text-blue-400 transition-colors"
+              className="p-1.5 text-zinc-400 dark:text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               title="Visit original source"
             >
               <ExternalLink className="w-3.5 h-3.5" />

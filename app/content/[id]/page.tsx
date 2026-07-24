@@ -145,28 +145,28 @@ export default function ContentDetailPage() {
         </button>
 
         {/* Content Banner Header */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-4 shadow-2xl">
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-4 shadow-sm">
           <div className="flex items-center gap-2 flex-wrap text-xs">
-            <span className="px-2.5 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold uppercase tracking-wider text-[10px]">
+            <span className="px-2.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-bold uppercase tracking-wider text-[10px]">
               {item.category}
             </span>
-            <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 font-semibold border border-zinc-700/60">
+            <span className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-semibold border border-zinc-200 dark:border-zinc-700/60">
               {item.contentType}
             </span>
-            <span className="text-zinc-600">&bull;</span>
-            <span className="flex items-center gap-1 text-zinc-400 font-mono">
+            <span className="text-zinc-400 dark:text-zinc-600">&bull;</span>
+            <span className="flex items-center gap-1 text-zinc-500 dark:text-zinc-400 font-mono">
               <Clock className="w-3.5 h-3.5 text-zinc-400" />
               {item.readTime}
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-100 leading-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-100 leading-tight">
             {item.title}
           </h1>
 
-          <div className="flex items-center justify-between gap-4 flex-wrap text-xs text-zinc-400 border-t border-zinc-800 pt-4 font-mono">
+          <div className="flex items-center justify-between gap-4 flex-wrap text-xs text-zinc-500 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800 pt-4 font-mono">
             <div>
-              Source: <span className="font-semibold text-zinc-200">{item.source}</span>
+              Source: <span className="font-semibold text-zinc-700 dark:text-zinc-200">{item.source}</span>
               {item.author && ` by ${item.author}`}
             </div>
 
@@ -183,22 +183,22 @@ export default function ContentDetailPage() {
         </div>
 
         {/* Key Takeaways */}
-        <div className="bg-blue-500/5 border border-blue-500/20 rounded-2xl p-6 space-y-4">
-          <h3 className="text-sm font-bold text-blue-400 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-blue-400" />
+        <div className="bg-blue-50/50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-2xl p-6 space-y-4">
+          <h3 className="text-sm font-bold text-blue-600 dark:text-blue-400 flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             Actionable Key Takeaways
           </h3>
 
           <ul className="space-y-2.5">
             {item.keyTakeaways.map((takeaway, idx) => (
-              <li key={idx} className="flex items-start justify-between gap-3 bg-zinc-950/80 p-3.5 rounded-xl border border-zinc-800 text-xs text-zinc-200 font-medium">
+              <li key={idx} className="flex items-start justify-between gap-3 bg-white dark:bg-zinc-950/80 p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-200 font-medium">
                 <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span className="leading-relaxed">{takeaway}</span>
                 </div>
                 <button
                   onClick={() => handleCopyTakeaway(takeaway, idx)}
-                  className="p-1 text-zinc-500 hover:text-blue-400 transition-colors shrink-0 cursor-pointer"
+                  className="p-1 text-zinc-400 dark:text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors shrink-0 cursor-pointer"
                 >
                   <Copy className="w-3.5 h-3.5" />
                 </button>
@@ -208,20 +208,20 @@ export default function ContentDetailPage() {
         </div>
 
         {/* Executive Summary */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-4">
-          <h3 className="text-base font-bold text-zinc-100 flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-blue-400" />
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-4">
+          <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+            <BookOpen className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             AI Executive Summary
           </h3>
-          <div className="text-sm text-zinc-300 leading-relaxed whitespace-pre-line space-y-3 bg-zinc-950/60 p-4 rounded-xl border border-zinc-800">
+          <div className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-line space-y-3 bg-zinc-50 dark:bg-zinc-950/60 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800">
             {item.summary}
           </div>
         </div>
 
         {/* Ask AI Chat Section */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-4">
-          <h3 className="text-base font-bold text-zinc-100 flex items-center gap-2">
-            <MessageSquare className="w-4 h-4 text-blue-400" />
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-4">
+          <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+            <MessageSquare className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             Ask AI Assistant About This Article
           </h3>
 
@@ -242,7 +242,7 @@ export default function ContentDetailPage() {
                   className={`p-3.5 rounded-2xl max-w-[85%] whitespace-pre-wrap leading-relaxed ${
                     msg.role === 'user'
                       ? 'bg-blue-600 text-white font-medium'
-                      : 'bg-zinc-800 text-zinc-200 border border-zinc-700/60'
+                      : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700/60'
                   }`}
                 >
                   {msg.text}
@@ -256,14 +256,14 @@ export default function ContentDetailPage() {
               e.preventDefault();
               handleSendQuestion();
             }}
-            className="flex items-center gap-2 pt-2 border-t border-zinc-800"
+            className="flex items-center gap-2 pt-2 border-t border-zinc-200 dark:border-zinc-800"
           >
             <input
               type="text"
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               placeholder="Type your question..."
-              className="flex-1 bg-zinc-800 text-xs px-3.5 py-2.5 rounded-xl border border-zinc-700 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium placeholder-zinc-500"
+              className="flex-1 bg-zinc-50 dark:bg-zinc-800 text-xs px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
             />
             <button
               type="submit"
