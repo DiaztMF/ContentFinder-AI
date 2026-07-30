@@ -1,7 +1,8 @@
 import { ContentItem, Collection, SavedItem } from './types';
 import { INITIAL_CONTENTS, INITIAL_COLLECTIONS } from './initial-seed';
 import { getDb } from '@/db';
-import { contents, collections, savedItems, tags, contentTags } from '@/db/schema';
+import { contents, collections, savedItems, tags, contentTags, contentEmbeddings } from '@/db/schema';
+import { generateTextEmbedding } from '@/lib/gemini';
 import { eq, desc } from 'drizzle-orm';
 
 // In-memory store for fallback mode or instant SSR rendering
@@ -76,6 +77,17 @@ export async function addContentItem(item: ContentItem): Promise<ContentItem> {
         rawContent: item.rawContent,
         createdAt: new Date(item.createdAt)
       });
+
+      // Generate and store vector embedding for RAG search
+      const embeddingText = `${item.title}. ${item.summary}. Key Takeaways: ${item.keyTakeaways.join(', ')}`;
+      const vec = await generateTextEmbedding(embeddingText);
+      if (vec && vec.length > 0) {
+        await db.insert(contentEmbeddings).values({
+          contentId: item.id,
+          embedding: vec,
+          updatedAt: new Date()
+        });
+      }
     } catch (e) {
       console.warn('Postgres insert error for content:', e);
     }

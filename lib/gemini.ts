@@ -16,6 +16,27 @@ function getAiClient() {
   });
 }
 
+export async function generateTextEmbedding(text: string): Promise<number[]> {
+  try {
+    const ai = getAiClient();
+    const response = await ai.models.embedContent({
+      model: 'text-embedding-004',
+      contents: text
+    });
+    const resAny = response as any;
+    if (resAny.embedding?.values) {
+      return resAny.embedding.values;
+    }
+    if (resAny.embeddings?.[0]?.values) {
+      return resAny.embeddings[0].values;
+    }
+    return [];
+  } catch (error) {
+    console.error('Error generating text embedding:', error);
+    return [];
+  }
+}
+
 export async function analyzeAndIndexContent(input: {
   url?: string;
   text?: string;

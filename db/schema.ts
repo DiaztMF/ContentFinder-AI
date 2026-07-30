@@ -1,4 +1,10 @@
-import { pgTable, text, timestamp, integer, jsonb } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, integer, jsonb, customType } from 'drizzle-orm/pg-core';
+
+export const vector768 = customType<{ data: number[] }>({
+  dataType() {
+    return 'vector(768)';
+  },
+});
 
 export const contents = pgTable('contents', {
   id: text('id').primaryKey(),
@@ -17,6 +23,12 @@ export const contents = pgTable('contents', {
   imageUrl: text('image_url'),
   rawContent: text('raw_content'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export const contentEmbeddings = pgTable('content_embeddings', {
+  contentId: text('content_id').notNull().references(() => contents.id, { onDelete: 'cascade' }),
+  embedding: vector768('embedding').notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
 export const tags = pgTable('tags', {
