@@ -1,2 +1,3 @@
 # Exclude graphify outputs from GitHub Linguist language statistics
 graphify-out/** linguist-vendored=true
+graphify-out/graph.json merge=graphify
