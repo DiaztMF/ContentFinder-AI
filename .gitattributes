@@ -1,0 +1,2 @@
+# Exclude graphify outputs from GitHub Linguist language statistics
+graphify-out/** linguist-vendored=true
