@@ -1,5 +1,6 @@
 import { GoogleGenAI, Type } from '@google/genai';
 import { ContentItem, SearchIntent, TechnicalDifficulty, ContentType } from './types';
+import { fetchAndParseUrl } from './url-scraper';
 
 function getAiClient() {
   const apiKey = process.env.GEMINI_API_KEY;
@@ -43,10 +44,32 @@ export async function analyzeAndIndexContent(input: {
   title?: string;
 }): Promise<Partial<ContentItem>> {
   const ai = getAiClient();
+  let contentText = input.text || '';
+  let contentTitle = input.title || '';
+  let fetchedImageUrl: string | undefined = undefined;
+
+  // Auto-scrape webpage content if URL is provided and text is missing
+  if (input.url && !contentText.trim()) {
+    try {
+      const scraped = await fetchAndParseUrl(input.url);
+      if (scraped.extractedText) {
+        contentText = scraped.extractedText;
+      }
+      if (scraped.title && !contentTitle) {
+        contentTitle = scraped.title;
+      }
+      if (scraped.imageUrl) {
+        fetchedImageUrl = scraped.imageUrl;
+      }
+    } catch (e) {
+      console.warn('Scraper warning during indexing:', e);
+    }
+  }
+
   const prompt = `Analyze and summarize the following web content or URL for a technical knowledge discovery engine.
 URL / Link: ${input.url || 'N/A'}
-Title provided: ${input.title || 'N/A'}
-Content Text: ${input.text || 'N/A'}
+Title provided: ${contentTitle || 'N/A'}
+Content Text: ${contentText || 'N/A'}
 
 Provide a high quality technical extraction with executive summary, key takeaways, category, content type, reading time, difficulty, and relevant tags.`;
 
@@ -131,8 +154,8 @@ Provide a high quality technical extraction with executive summary, key takeaway
       difficulty,
       relevanceScore: 95,
       tags: Array.isArray(parsed.tags) ? parsed.tags : ['Tech', 'Knowledge'],
-      rawContent: input.text || undefined,
-      imageUrl: `https://picsum.photos/seed/${encodeURIComponent(parsed.title || 'tech')}/800/450`
+      rawContent: contentText || input.text || undefined,
+      imageUrl: fetchedImageUrl || `https://picsum.photos/seed/${encodeURIComponent(parsed.title || 'tech')}/800/450`
     };
   } catch (error) {
     console.error('Error analyzing content with Gemini:', error);
