@@ -114,7 +114,7 @@ export function CollectionsManager({
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-5">
         <div>
           <h1 className="text-2xl font-extrabold text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
-            <Bookmark className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <Bookmark className="w-6 h-6 text-zinc-900 dark:text-zinc-100" />
             <span>Saved Collections</span>
           </h1>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
@@ -124,7 +124,7 @@ export function CollectionsManager({
 
         <button
           onClick={() => setShowCreateModal(true)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/20 transition-colors cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-sm transition-colors cursor-pointer"
         >
           <FolderPlus className="w-4 h-4" />
           <span>New Collection</span>
@@ -150,12 +150,16 @@ export function CollectionsManager({
                   onClick={() => setSelectedColId(col.id)}
                   className={`w-full flex items-center justify-between p-3.5 rounded-2xl text-left border transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-blue-50 dark:bg-blue-500/10 border-blue-200 dark:border-blue-500/30 text-zinc-900 dark:text-zinc-100 shadow-sm'
+                      ? 'bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-600 text-zinc-900 dark:text-zinc-100 shadow-sm'
                       : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:border-zinc-300 dark:hover:border-zinc-700'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-500/30">
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border transition-colors ${
+                      isSelected
+                        ? 'bg-white dark:bg-zinc-900 border-zinc-300 dark:border-zinc-600 text-zinc-900 dark:text-zinc-100'
+                        : 'bg-zinc-50 dark:bg-zinc-900/50 border-zinc-200 dark:border-zinc-800/80 text-zinc-500 dark:text-zinc-400'
+                    }`}>
                       <IconComp className="w-4 h-4" />
                     </div>
                     <div>
@@ -183,7 +187,7 @@ export function CollectionsManager({
               <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 mb-6 shadow-sm flex items-center justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800">
                       {selectedCollection.itemIds.length} Saved Items
                     </span>
                   </div>
@@ -239,7 +243,7 @@ export function CollectionsManager({
           <div className="relative w-full max-w-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl p-6 space-y-5">
             <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
               <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                <FolderPlus className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <FolderPlus className="w-4 h-4 text-zinc-900 dark:text-zinc-100" />
                 Create New Collection
               </h3>
               <button
@@ -261,7 +265,7 @@ export function CollectionsManager({
                   value={newColName}
                   onChange={(e) => setNewColName(e.target.value)}
                   placeholder="e.g., Web Dev 2026 or AI Research"
-                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
+                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
                 />
               </div>
 
@@ -274,7 +278,7 @@ export function CollectionsManager({
                   value={newColDesc}
                   onChange={(e) => setNewColDesc(e.target.value)}
                   placeholder="Brief description of items saved in this collection..."
-                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
+                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
                 />
               </div>
 
@@ -292,7 +296,7 @@ export function CollectionsManager({
                         onClick={() => setNewColIcon(i.id)}
                         className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
                           newColIcon === i.id
-                            ? 'bg-blue-50 dark:bg-blue-500/20 border-blue-500 text-blue-600 dark:text-blue-400'
+                            ? 'bg-zinc-200 dark:bg-zinc-700 border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100'
                             : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200'
                         }`}
                       >
@@ -314,7 +318,7 @@ export function CollectionsManager({
                 <button
                   type="submit"
                   disabled={isCreating || !newColName.trim()}
-                  className="px-5 py-2 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-500 shadow-md shadow-blue-600/20 transition-colors cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 font-semibold shadow-sm transition-colors cursor-pointer"
                 >
                   {isCreating ? 'Creating...' : 'Create'}
                 </button>

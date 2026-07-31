@@ -71,19 +71,19 @@ export function ContentGrid({
   }, [items, selectedCategory, selectedType, selectedDifficulty, sortBy]);
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full max-w-6xl mx-auto space-y-6">
       {/* Controls Bar */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-3.5 rounded-2xl shadow-sm dark:shadow-xl">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3.5 rounded-xl shadow-sm">
         {/* Category Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium whitespace-nowrap transition-all cursor-pointer uppercase tracking-wider ${
                 selectedCategory === cat
-                  ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
-                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                  ? 'bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm'
+                  : 'bg-transparent text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-900'
               }`}
             >
               {cat}
@@ -97,13 +97,13 @@ export function ContentGrid({
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value as any)}
-            className="px-3 py-1.5 rounded-xl text-xs font-medium bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+            className="px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider font-medium bg-transparent border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-500 cursor-pointer"
           >
             <option value="all">All Formats</option>
             <option value="article">Articles</option>
             <option value="video">Videos</option>
-            <option value="documentation">Documentation</option>
-            <option value="code_snippet">Code Snippets</option>
+            <option value="documentation">Docs</option>
+            <option value="code_snippet">Snippets</option>
             <option value="tutorial">Tutorials</option>
           </select>
 
@@ -111,7 +111,7 @@ export function ContentGrid({
           <select
             value={selectedDifficulty}
             onChange={(e) => setSelectedDifficulty(e.target.value as any)}
-            className="px-3 py-1.5 rounded-xl text-xs font-medium bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+            className="px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider font-medium bg-transparent border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-500 cursor-pointer"
           >
             <option value="all">All Levels</option>
             <option value="Beginner">Beginner</option>
@@ -123,7 +123,7 @@ export function ContentGrid({
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-3 py-1.5 rounded-xl text-xs font-medium bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer font-semibold"
+            className="px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider font-semibold bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-500 cursor-pointer"
           >
             <option value="score">Sort: Relevance</option>
             <option value="newest">Sort: Newest</option>
@@ -134,7 +134,7 @@ export function ContentGrid({
 
       {/* Grid or Empty State */}
       {filteredItems.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex flex-col gap-4">
           {filteredItems.map((item) => (
             <ContentCard
               key={item.id}
@@ -146,7 +146,7 @@ export function ContentGrid({
           ))}
         </div>
       ) : (
-        <div className="bg-white dark:bg-zinc-900 border border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl p-12 text-center space-y-4">
+        <div className="bg-white dark:bg-zinc-950 border border-dashed border-zinc-300 dark:border-zinc-800 rounded-xl p-12 text-center space-y-4">
           <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 mx-auto flex items-center justify-center border border-blue-500/20">
             <Inbox className="w-6 h-6" />
           </div>

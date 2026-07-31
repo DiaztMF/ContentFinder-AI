@@ -10,16 +10,10 @@ import {
   GraduationCap,
   Bookmark,
   ExternalLink,
-  Eye,
   Clock,
-  Sparkles,
-  CheckCircle2,
   Share2
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 
 interface ContentCardProps {
   item: ContentItem & { matchScore?: number; matchExplanation?: string };
@@ -29,34 +23,17 @@ interface ContentCardProps {
 }
 
 export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: ContentCardProps) {
-  const getContentTypeBadge = (type: string) => {
+  const getContentTypeIcon = (type: string) => {
     switch (type) {
-      case 'video':
-        return { label: 'Video', icon: Video, color: 'bg-rose-500/10 text-rose-500 dark:text-rose-400 border-rose-500/20' };
-      case 'documentation':
-        return { label: 'Docs', icon: BookOpen, color: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20' };
-      case 'code_snippet':
-        return { label: 'Code', icon: Code, color: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20' };
-      case 'tutorial':
-        return { label: 'Tutorial', icon: GraduationCap, color: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20' };
-      default:
-        return { label: 'Article', icon: FileText, color: 'bg-sky-500/10 text-sky-600 dark:text-sky-400 border-sky-500/20' };
+      case 'video': return Video;
+      case 'documentation': return BookOpen;
+      case 'code_snippet': return Code;
+      case 'tutorial': return GraduationCap;
+      default: return FileText;
     }
   };
 
-  const getDifficultyBadge = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Beginner':
-        return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
-      case 'Advanced':
-        return 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20';
-      default:
-        return 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
-    }
-  };
-
-  const badge = getContentTypeBadge(item.contentType);
-  const IconComponent = badge.icon;
+  const IconComponent = getContentTypeIcon(item.contentType);
   const matchScore = item.matchScore ?? item.relevanceScore ?? 90;
 
   const handleShare = (e: React.MouseEvent) => {
@@ -68,128 +45,101 @@ export function ContentCard({ item, onSelect, onBookmark, isSaved = false }: Con
   };
 
   return (
-    <Card
+    <div
       onClick={() => onSelect(item)}
-      className="group relative bg-card border-border rounded-2xl p-5 shadow-xs dark:shadow-xl hover:border-primary/50 hover:shadow-primary/10 transition-all duration-300 flex flex-col justify-between cursor-pointer overflow-hidden"
+      className="group relative bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 shadow-sm hover:border-zinc-400 dark:hover:border-zinc-500 transition-all duration-200 cursor-pointer flex flex-col md:flex-row md:items-start gap-4 md:gap-6"
     >
-      <CardHeader className="p-0 space-y-3">
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 flex-wrap">
-            {/* Content Type Badge */}
-            <Badge variant="outline" className={`gap-1 px-2 py-0.5 text-xs font-semibold ${badge.color}`}>
-              <IconComponent className="size-3.5" />
-              <span>{badge.label}</span>
-            </Badge>
-
-            {/* Category */}
-            <Badge variant="secondary" className="text-xs font-medium bg-muted text-muted-foreground border-border">
-              {item.category}
-            </Badge>
-
-            {/* Difficulty */}
-            <Badge variant="outline" className={`text-[10px] font-bold ${getDifficultyBadge(item.difficulty)}`}>
-              {item.difficulty}
-            </Badge>
-          </div>
-
-          {/* Bookmark CTA */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={(e) => {
-              e.stopPropagation();
-              onBookmark(item);
-            }}
-            className={`rounded-xl transition-colors cursor-pointer ${
-              isSaved
-                ? 'bg-blue-600 text-white hover:bg-blue-500'
-                : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-            }`}
-            title={isSaved ? 'Saved in collection' : 'Bookmark content'}
-          >
-            <Bookmark className={`size-4 ${isSaved ? 'fill-current' : ''}`} />
-          </Button>
+      {/* Left Column: Title & Description */}
+      <div className="flex-1 min-w-0 space-y-2">
+        <div className="flex items-center gap-2 mb-1">
+          <span className="flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider font-semibold text-zinc-500 bg-zinc-100 dark:bg-zinc-900 px-1.5 py-0.5 rounded">
+            <IconComponent className="w-3 h-3" />
+            {item.contentType === 'code_snippet' ? 'Snippet' : item.contentType}
+          </span>
+          <span className="text-[10px] font-mono text-zinc-400 border-l border-zinc-300 dark:border-zinc-700 pl-2">
+            {item.category}
+          </span>
+          <span className="text-[10px] font-mono text-zinc-400 border-l border-zinc-300 dark:border-zinc-700 pl-2">
+            {item.difficulty}
+          </span>
         </div>
-
-        {/* Title */}
-        <CardTitle className="text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-snug">
+        
+        <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 leading-snug">
           {item.title}
-        </CardTitle>
-
-        {/* AI Match Explanation */}
-        {item.matchExplanation && (
-          <div className="bg-primary/5 border border-primary/20 rounded-xl p-2.5 text-xs text-primary dark:text-blue-300 flex items-start gap-2">
-            <Sparkles className="size-3.5 text-primary shrink-0 mt-0.5" />
-            <p className="line-clamp-2 leading-relaxed italic text-[11px]">
-              &quot;{item.matchExplanation}&quot;
-            </p>
-          </div>
-        )}
-
-        {/* Summary */}
-        <CardDescription className="text-xs text-muted-foreground line-clamp-3 leading-relaxed">
+        </h3>
+        
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-relaxed max-w-2xl">
           {item.summary}
-        </CardDescription>
-      </CardHeader>
+        </p>
 
-      <CardContent className="p-0 pt-3 space-y-3">
-        {/* Key Takeaways Highlights */}
-        {item.keyTakeaways && item.keyTakeaways.length > 0 && (
-          <div className="space-y-1.5 pt-1">
-            <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-muted-foreground">
-              Key Takeaways:
-            </span>
-            <ul className="space-y-1">
-              {item.keyTakeaways.slice(0, 2).map((takeaway, idx) => (
-                <li key={idx} className="text-xs text-foreground/90 flex items-start gap-1.5 line-clamp-1">
-                  <CheckCircle2 className="size-3 text-emerald-500 shrink-0 mt-0.5" />
-                  <span>{takeaway}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {item.matchExplanation && (
+          <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-500 mt-2 flex items-start gap-1.5">
+            <span className="text-zinc-400">&gt;</span> 
+            <span className="italic line-clamp-1">{item.matchExplanation}</span>
+          </p>
         )}
-      </CardContent>
+      </div>
 
-      <CardFooter className="p-0 pt-4 border-t border-border flex items-center justify-between gap-2 text-xs text-muted-foreground">
-        <div className="flex items-center gap-3">
-          {/* Match Score Badge */}
-          <div className="flex items-center gap-1 font-bold text-primary text-xs bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">
-            <Sparkles className="size-3 text-primary" />
-            <span>{matchScore}% Match</span>
+      {/* Middle Column: Key Takeaways */}
+      {item.keyTakeaways && item.keyTakeaways.length > 0 && (
+        <div className="hidden md:flex flex-col w-64 shrink-0 space-y-1.5 border-l border-zinc-200 dark:border-zinc-800 pl-6">
+          <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-zinc-400">
+            Takeaways
+          </span>
+          <ul className="space-y-1">
+            {item.keyTakeaways.slice(0, 2).map((takeaway, idx) => (
+              <li key={idx} className="text-[11px] text-zinc-600 dark:text-zinc-300 flex items-start gap-1.5 line-clamp-2 leading-snug">
+                <span className="text-zinc-400 font-mono shrink-0">-</span>
+                <span>{takeaway}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Right Column: Meta & Actions */}
+      <div className="flex md:flex-col items-center md:items-end justify-between md:justify-start gap-3 shrink-0 border-t md:border-t-0 md:border-l border-zinc-200 dark:border-zinc-800 pt-3 md:pt-0 md:pl-6 md:w-32">
+        <div className="flex md:flex-col items-center md:items-end gap-2 md:gap-1">
+          <div className="text-[11px] font-mono font-semibold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-900 px-2 py-1 rounded">
+            {matchScore}% Match
           </div>
-
-          {/* Read Time */}
-          <div className="flex items-center gap-1 text-muted-foreground font-medium">
-            <Clock className="size-3" />
+          <div className="flex items-center gap-1 text-[10px] font-mono text-zinc-500">
+            <Clock className="w-3 h-3" />
             <span>{item.readTime}</span>
           </div>
         </div>
 
-        {/* Action Controls */}
-        <div className="flex items-center gap-1">
-          <Button
-            variant="ghost"
-            size="icon"
+        <div className="flex items-center gap-1 md:mt-auto">
+          <button
+            onClick={(e) => { e.stopPropagation(); onBookmark(item); }}
+            className={`p-1.5 rounded-md transition-colors ${
+              isSaved 
+                ? 'text-zinc-900 dark:text-white bg-zinc-200 dark:bg-zinc-800' 
+                : 'text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+            }`}
+            title={isSaved ? 'Saved in collection' : 'Bookmark content'}
+          >
+            <Bookmark className={`w-3.5 h-3.5 ${isSaved ? 'fill-current' : ''}`} />
+          </button>
+          <button
             onClick={handleShare}
-            className="text-muted-foreground hover:text-foreground rounded-lg"
+            className="p-1.5 rounded-md text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             title="Share content link"
           >
-            <Share2 className="size-3.5" />
-          </Button>
-
+            <Share2 className="w-3.5 h-3.5" />
+          </button>
           <a
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="p-1.5 text-muted-foreground hover:text-primary transition-colors rounded-lg"
+            className="p-1.5 rounded-md text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             title="Visit source website"
           >
-            <ExternalLink className="size-3.5" />
+            <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 }

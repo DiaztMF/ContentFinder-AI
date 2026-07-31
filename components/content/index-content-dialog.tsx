@@ -69,7 +69,7 @@ export function IndexContentDialog({ isOpen, onClose, onSuccess }: IndexContentD
         {/* Modal Header */}
         <div className="p-5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50 dark:bg-zinc-950/80">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-600/20">
+            <div className="w-8 h-8 rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center shadow-sm">
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
@@ -97,7 +97,7 @@ export function IndexContentDialog({ isOpen, onClose, onSuccess }: IndexContentD
             onClick={() => setActiveTab('url')}
             className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-semibold border-b-2 transition-all cursor-pointer ${
               activeTab === 'url'
-                ? 'border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400'
+                ? 'border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100'
                 : 'border-transparent text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
             }`}
           >
@@ -110,7 +110,7 @@ export function IndexContentDialog({ isOpen, onClose, onSuccess }: IndexContentD
             onClick={() => setActiveTab('text')}
             className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-semibold border-b-2 transition-all cursor-pointer ${
               activeTab === 'text'
-                ? 'border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400'
+                ? 'border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100'
                 : 'border-transparent text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
             }`}
           >
@@ -133,7 +133,7 @@ export function IndexContentDialog({ isOpen, onClose, onSuccess }: IndexContentD
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   placeholder="https://dev.to/article-title or https://youtube.com/watch?v=..."
-                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
+                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
                 />
               </div>
 
@@ -146,7 +146,7 @@ export function IndexContentDialog({ isOpen, onClose, onSuccess }: IndexContentD
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Leave empty for auto-generation..."
-                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
+                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
                 />
               </div>
             </div>
@@ -161,7 +161,7 @@ export function IndexContentDialog({ isOpen, onClose, onSuccess }: IndexContentD
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g., Key Learnings from Systems Architecture paper"
-                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
+                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500 font-medium placeholder-zinc-400 dark:placeholder-zinc-500"
                 />
               </div>
 
@@ -175,15 +175,15 @@ export function IndexContentDialog({ isOpen, onClose, onSuccess }: IndexContentD
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="Paste article text, documentation notes, or tutorial transcript here..."
-                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl p-3 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium resize-none placeholder-zinc-400 dark:placeholder-zinc-500"
+                  className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl p-3 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500 font-medium resize-none placeholder-zinc-400 dark:placeholder-zinc-500"
                 />
               </div>
             </div>
           )}
 
           {/* AI Processing Note */}
-          <div className="bg-blue-50 dark:bg-blue-500/10 p-3 rounded-xl border border-blue-200 dark:border-blue-500/20 flex items-start gap-2 text-[11px] text-blue-700 dark:text-blue-300">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+          <div className="bg-zinc-50 dark:bg-zinc-900/50 p-3 rounded-xl border border-zinc-200 dark:border-zinc-800 flex items-start gap-2 text-[11px] text-zinc-600 dark:text-zinc-400 font-mono">
+            <Sparkles className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-500 shrink-0 mt-0.5" />
             <span>
               Gemini AI will parse content, categorize domain, extract 4 key takeaways, estimate reading time, and store in database.
             </span>
@@ -202,7 +202,7 @@ export function IndexContentDialog({ isOpen, onClose, onSuccess }: IndexContentD
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/20 disabled:opacity-50 transition-all cursor-pointer"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 shadow-sm disabled:opacity-50 transition-all cursor-pointer"
             >
               {isSubmitting ? (
                 <>

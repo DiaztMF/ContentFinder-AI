@@ -145,7 +145,7 @@ export default function HomePage() {
         savedCount={savedItemIds.length}
       />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Hero Search Section */}
         <HeroSearch
           onSearch={handleSearch}
